@@ -4,46 +4,30 @@ defmodule Mpesa.Transactions do
   check_balance
   withdraw and deposit
   """
-
 alias Balance
 
 
-def check_balance(account) do
-
-  %Balance{account_balance: account_balance} = account
-  account_balance
-
-end
 
 
-@spec deposit(float())::nil
- def deposit(amount)  do
-    balance_amount = check_balance(%Balance{})
-    new_amount = balance_amount + amount
+ def deposit(balance,amount)  do
+    # balance_amount = check_balance(%Balance{})
+    balance + amount
 
-    # IO.puts "you have successfully deposited"
-    # %Balance{account_balance: new_amount}
-    new_amount
   end
 
-  def withdraw(amount) do
-    balance_amount = check_balance(%Balance)
+  def withdraw(balance_amount,amount) do
+
 
     if amount > balance_amount do
       IO.puts "sorry you cannot withdraw #{amount} you balance is :: #{balance_amount}"
     else
-      b = balance_amount - amount
-      %Balance{account_balance: b}
-      IO.puts "you have successfully withdrawned #{amount} you balance is #{balance_amount}"
+     balance =  balance_amount - amount
+     IO.puts "you have successfully withdrawned #{amount} you balance is #{balance}"
+     balance
+
     end
   end
 
-  # def withdraw(amount) do
-
-  #   case balance_amount() do
-  #     amount >
-  #   end
-  # end
 
 
 end

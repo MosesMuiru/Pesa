@@ -1,15 +1,11 @@
 defmodule Mpesa.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
-  @moduledoc false
 
   use Application
 
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Mpesa.Worker.start_link(arg)
-      # {Mpesa.Worker, arg}
+      Mpesa.MpesaServer.start
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
