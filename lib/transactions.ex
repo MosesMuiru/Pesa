@@ -7,7 +7,7 @@ defmodule Mpesa.Transactions do
   alias Balance
 
   def deposit(balance, amount) do
-    # balance_amount = check_balance(%Balance{})
+     # balance_amount = check_balance(%Balance{})
     balance + amount
   end
 

@@ -4,35 +4,43 @@ defmodule Mpesa.MpesaServer do
 
   # the client
   def main(_) do
+   {:ok, pid} = GenServer.start_link(__MODULE__, 0)
 
 
-  options =  IO.gets "you have created account
-    1. deposit
-    2.check_balance"
+inspect(pid)
+
+    options = IO.gets("You have created an account.\n1. Deposit.\n2. WithDraw \n3. Check Balance")
     |> String.trim()
 
-    IO.puts options
-    IO.puts is_binary(options)
-    pid = self()
-  #   cond   do
-  # options == "1" ->
-  #         amount = IO.gets "enter the amount"
-  #         |> String.trim()
-  #         deposit(pid,amount)
-  # options ==  "2" -> check_balance(pid)
-  #   # _-> IO.puts "failed"
-  #   end
 
-    if options == 1 do
-      amount = IO.gets "enter the amount"
-          |> String.trim()
-          |>String.to_float()
-          # deposit(pid, amount)
-    else
-      IO.puts "fuck no working"
+    # IO.puts options
+    inspect( options)
+
+
+    case options do
+      "1" ->
+        amount = IO.gets("Enter the amount")
+                |> String.trim()
+                |> String.to_integer()
+       IO.puts(amount)
+        deposit(pid, amount)
+
+       "2" ->
+          amount = IO.gets("Enter the amount you want to withdraw")
+                  |> String.trim()
+                  |> String.to_integer()
+          IO.puts(amount)
+          withdraw(pid, amount)
+      "3" ->
+        check_balance(pid)
+      _ ->
+        IO.puts "Option not recognized"
     end
-
   end
+
+  # def start_link do
+  #   GenServer.start_link(__MODULE__, 0)
+  # end
 
   def deposit(pid, amount) do
     GenServer.call(pid, {:deposit, amount})
@@ -48,7 +56,7 @@ defmodule Mpesa.MpesaServer do
 
   # the server
   def init(_) do
-    {:ok, {}}
+    {:ok, 0}
   end
 
   def handle_call({:deposit, amount}, _from, initial_amount) do
@@ -65,4 +73,5 @@ defmodule Mpesa.MpesaServer do
   def handle_call(:check_balance, _from, amount) do
     {:reply, amount, amount}
   end
+
 end
