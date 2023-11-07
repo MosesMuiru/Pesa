@@ -5,7 +5,6 @@
 
 #   ## server
 
-
 #   """
 #   alias Mpesa.Transactions
 #   alias Balance
@@ -55,7 +54,5 @@
 #    balance = Transactions.check_balance %Balance{}
 #     {:reply, balance, amount }
 #   end
-
-
 
 # end
