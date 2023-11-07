@@ -2,39 +2,43 @@ defmodule Mpesa.MpesaServer do
   use GenServer
   alias Mpesa.Transactions
 
-  # the client
+  # the start of the operation
   def main(_) do
-   {:ok, pid} = GenServer.start_link(__MODULE__, 0)
+    {:ok, pid} = GenServer.start_link(__MODULE__, 0)
 
+    inspect(pid)
 
-inspect(pid)
-
-    options = IO.gets("You have created an account.\n1. Deposit.\n2. WithDraw \n3. Check Balance\n")
-    |> String.trim()
-
+    options =
+      IO.gets("You have created an account.\n1. Deposit.\n2. WithDraw \n3. Check Balance\n")
+      |> String.trim()
 
     # IO.puts options
-    inspect( options)
-
+    inspect(options)
 
     case options do
       "1" ->
-        amount = IO.gets("Enter the amount")
-                |> String.trim()
-                |> String.to_integer()
-       IO.puts(amount)
+        amount =
+          IO.gets("Enter the amount")
+          |> String.trim()
+          |> String.to_integer()
+
+        IO.puts(amount)
         deposit(pid, amount)
 
-       "2" ->
-          amount = IO.gets("Enter the amount you want to withdraw")
-                  |> String.trim()
-                  |> String.to_integer()
-          IO.puts(amount)
-          withdraw(pid, amount)
+      "2" ->
+        amount =
+          IO.gets("Enter the amount you want to withdraw")
+          |> String.trim()
+          |> String.to_integer()
+
+        IO.puts(amount)
+        withdraw(pid, amount)
+
       "3" ->
         check_balance(pid)
+
       _ ->
-        IO.puts "Option not recognized"
+        IO.puts("Option not recognized")
     end
   end
 
@@ -73,5 +77,4 @@ inspect(pid)
   def handle_call(:check_balance, _from, amount) do
     {:reply, amount, amount}
   end
-
 end

@@ -20,6 +20,10 @@ mix escript.build
 ./mpesa 
 
 
+the executable file does not maintain the state
+
+
+
 ```elixir
 def deps do
   [
