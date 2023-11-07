@@ -9,7 +9,7 @@ defmodule Mpesa.MpesaServer do
 
 inspect(pid)
 
-    options = IO.gets("You have created an account.\n1. Deposit.\n2. WithDraw \n3. Check Balance")
+    options = IO.gets("You have created an account.\n1. Deposit.\n2. WithDraw \n3. Check Balance\n")
     |> String.trim()
 
 

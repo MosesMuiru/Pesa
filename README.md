@@ -11,6 +11,13 @@ withdraw - remove amount in the state
 
 ### you can not withdraw amount greater than the one in the account
 
+### made these executable
+to build your script
+
+
+mix escript.build
+
+./mpesa 
 
 
 ```elixir
@@ -20,8 +27,4 @@ def deps do
   ]
 end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/mpesa>.
 
