@@ -9,7 +9,7 @@ state - balance in the account
 deposit - add amout in the account
 withdraw - remove amount in the state
 
-### you can not withdraw amount greater than the one in the account
+ you can not withdraw amount greater than the one in the account
 
 ### made these executable
 to build your script
