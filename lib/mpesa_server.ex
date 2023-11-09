@@ -2,9 +2,14 @@ defmodule Mpesa.MpesaServer do
   use GenServer
   alias Mpesa.Transactions
 
+  # for starting and initializing the genserver
+
+  def start_link do
+     GenServer.start_link(__MODULE__, 0)
+  end
   # the start of the operation
   def main(_) do
-    {:ok, pid} = GenServer.start_link(__MODULE__, 0)
+    {:ok, pid} = start_link()
 
     inspect(pid)
 
@@ -31,6 +36,7 @@ defmodule Mpesa.MpesaServer do
           |> String.trim()
           |> String.to_integer()
 
+
         IO.puts(amount)
         withdraw(pid, amount)
 
@@ -39,6 +45,7 @@ defmodule Mpesa.MpesaServer do
 
       _ ->
         IO.puts("Option not recognized")
+
     end
   end
 

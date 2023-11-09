@@ -1,5 +1,6 @@
 defmodule MpesaTest do
   alias Mpesa.Transactions
+  alias Mpesa.MpesaServer
   use ExUnit.Case
   # doctest Mpesa
 
@@ -25,8 +26,30 @@ defmodule MpesaTest do
   describe "testing the mpesa server" do
 
    test "test deposit of the amout" do
-    sendingProcess.run(self())
-    
+  # assert MpesaServer.start_link() = {:ok, pid}
+  assert {:ok, _pid} = assert MpesaServer.start_link()
+
+
+   end
+
+   test "the deposit process" do
+    amount = 3000
+    {:ok, pid} = MpesaServer.start_link()
+    {:reply, account_balance, initial_balance} = MpesaServer.deposit(pid, amount)
+
+
+    assert account_balance > initial_balance
+
+
+    assert account_balance - initial_balance == amount
+  end
+
+
+   test "the withdrawal process" do
+    amount = 3000
+    {:ok, pid} = MpesaServer.start_link()
+    {:reply, withdraw_amount, initial_amount} = MpesaServer.withdraw(pid, amount)
+    assert withdraw_amount < initial_amount
 
    end
 
